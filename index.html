@@ -20,10 +20,19 @@
     </style>
     </head>
       <body>
-              <script>
+    <script>
+        var clicked = false;
+
         document.body.addEventListener('click', function() {
-            var audio = new Audio('kimigayo01.mp3'); // BGMファイルのパスを指定してください
-            audio.play();
+            if (!clicked) {
+                var audio = new Audio('kimigayo01.mp3'); // BGMファイルのパスを指定してください
+                audio.play();
+                audio.addEventListener('ended', function() {
+                    audio.currentTime = 0;
+                    audio.play();
+                });
+                clicked = true;
+            }
         });
     </script>
             <center>
