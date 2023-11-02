@@ -22,18 +22,21 @@
     </head>
       <body>
     <script>
-        var clicked = false;
+                var audio = new Audio('kimigayo01.mp3'); // BGMファイルのパス
+        audio.loop = true; // BGMをループ再生する
 
+        // スクロールイベント
+        window.addEventListener('scroll', function() {
+            // スクロール量に応じて音量を調整
+            var volume = 1 - window.scrollY / (document.body.scrollHeight - window.innerHeight);
+            // 音量を0から1の範囲に制限
+            volume = Math.max(0, Math.min(1, volume));
+            audio.volume = volume; // 音量を設定
+        });
+
+        // 初回の再生をトリガー
         document.body.addEventListener('click', function() {
-            if (!clicked) {
-                var audio = new Audio('kimigayo01.mp3'); // BGMファイルのパスを指定してください
-                audio.play();
-                audio.addEventListener('ended', function() {
-                    audio.currentTime = 0;
-                    audio.play();
-                });
-                clicked = true;
-            }
+            audio.play();
         });
     </script>
             <center>
